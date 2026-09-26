@@ -1,0 +1,116 @@
+table fct_pipeline_snapshot
+	lineageTag: 6113a930-2e21-4bb8-97db-f43c1d073460
+
+	column SnapshotDate
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 3c1cee06-94cc-4310-a8e0-a41211c085e0
+		summarizeBy: none
+		sourceColumn: SnapshotDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column OpportunityId
+		dataType: string
+		lineageTag: 0bd638f5-2da9-4594-9d81-537c26a42e48
+		summarizeBy: none
+		sourceColumn: OpportunityId
+
+		annotation SummarizationSetBy = Automatic
+
+	column StageName
+		dataType: string
+		isHidden
+		lineageTag: f87cc633-0aab-4fc4-aee6-c8551ada441f
+		summarizeBy: none
+		sourceColumn: StageName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ForecastCategory
+		dataType: string
+		isHidden
+		lineageTag: 2cc14ba9-84b1-4be3-89f1-7c8bc4359f18
+		summarizeBy: none
+		sourceColumn: ForecastCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column ARR_USD
+		dataType: double
+		isHidden
+		formatString: \$#,0
+		lineageTag: 7c1003b8-7877-49f2-874c-877920680422
+		summarizeBy: sum
+		sourceColumn: ARR_USD
+
+		annotation SummarizationSetBy = Automatic
+
+	column CloseDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 283f290f-2605-4aa7-b74b-c3190aa37811
+		summarizeBy: none
+		sourceColumn: CloseDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column AccountId
+		dataType: string
+		isHidden
+		lineageTag: 2672ca3e-db15-4c32-bfca-90ee3ffa11f5
+		summarizeBy: none
+		sourceColumn: AccountId
+
+	column OwnerId
+		dataType: string
+		isHidden
+		lineageTag: 9d7117d2-9724-4f8e-a993-533e8954ebf7
+		summarizeBy: none
+		sourceColumn: OwnerId
+
+	column Theater
+		dataType: string
+		isHidden
+		lineageTag: 0a2f14e6-6d62-4dad-9793-50778daf2412
+		summarizeBy: none
+		sourceColumn: Theater
+
+	column OrderType
+		dataType: string
+		isHidden
+		lineageTag: 242e6165-f61e-4d49-93d7-859c85d51b36
+		summarizeBy: none
+		sourceColumn: OrderType
+
+	column PrimaryProductType
+		dataType: string
+		isHidden
+		lineageTag: 1d244d4e-0dc9-4c6b-899f-fb38157a4a17
+		summarizeBy: none
+		sourceColumn: PrimaryProductType
+
+	partition fct_pipeline_snapshot = m
+		mode: import
+		queryGroup: 2_DataModel
+		source =
+				// Weekly pipeline snapshot. Opportunity attributes come from the staged header so the
+				// snapshot can be filtered by account, rep, theater and product without a second date path.
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "fct_pipeline_snapshot.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    #"Base Columns" = Table.SelectColumns(#"Promoted Headers", {"SnapshotDate", "OpportunityId", "StageName", "ForecastCategory", "ARR_USD", "CloseDate"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Base Columns", {{"SnapshotDate", type date}, {"OpportunityId", type text}, {"StageName", type text}, {"ForecastCategory", type text}, {"ARR_USD", type number}, {"CloseDate", type date}}, "en-US"),
+				    OppAttributes = Table.SelectColumns(stg_Opportunity, {"OpportunityId", "AccountId", "OwnerId", "Theater", "OrderType", "PrimaryProductType"}),
+				    #"Joined Opportunity" = Table.NestedJoin(#"Changed Type", {"OpportunityId"}, OppAttributes, {"OpportunityId"}, "Opp", JoinKind.LeftOuter),
+				    #"Expanded Opportunity" = Table.ExpandTableColumn(#"Joined Opportunity", "Opp", {"AccountId", "OwnerId", "Theater", "OrderType", "PrimaryProductType"})
+				in
+				    #"Expanded Opportunity"
+
+	annotation PBI_ResultType = Table
+

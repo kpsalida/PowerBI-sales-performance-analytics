@@ -1,0 +1,40 @@
+table dim_sales_rep
+	lineageTag: 16f921f0-c95f-4101-877c-0d6809dac30c
+
+	column RepId
+		dataType: string
+		lineageTag: 5dd7d02b-a57c-4e74-86cf-8945b0e6309b
+		summarizeBy: none
+		sourceColumn: RepId
+
+		annotation SummarizationSetBy = Automatic
+
+	column RepName
+		dataType: string
+		lineageTag: a6da3146-ff57-40ff-a14b-dd8e4547416e
+		summarizeBy: none
+		sourceColumn: RepName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Theater
+		dataType: string
+		lineageTag: cc1c3235-2b07-4dbb-ba0a-40a29e5ee368
+		summarizeBy: none
+		sourceColumn: Theater
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_sales_rep = m
+		mode: import
+		queryGroup: 2_DataModel
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "dim_sales_rep.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"RepId", type text}, {"RepName", type text}, {"Theater", type text}}, "en-US")
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

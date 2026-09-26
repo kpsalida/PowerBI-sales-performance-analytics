@@ -1,0 +1,108 @@
+/// Calendar table 2023-2027. Marked as the model's date table. Dataset as-of date: 2026-09-30.
+table dim_date
+	lineageTag: e1cdb47d-70c0-4437-95a1-0bcad4371b2e
+	dataCategory: Time
+
+	column Date
+		isUnique
+		formatString: yyyy-mm-dd
+		lineageTag: ff036b42-1d1a-4da2-95ea-166a9a03ab07
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+	column Year
+		formatString: 0
+		lineageTag: 083d6160-dea3-4739-9cbd-da3627642735
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Year]
+
+	column QuarterNo
+		lineageTag: f9c1bfb6-debc-4ace-9e5f-9cd968952ed6
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [QuarterNo]
+
+	column YearQuarter
+		lineageTag: f92a9bc8-0de9-4c1b-bdf9-a00aef87dd6d
+		isNameInferred
+		sourceColumn: [YearQuarter]
+		sortByColumn: YearQuarterSort
+
+	column YearQuarterSort
+		isHidden
+		lineageTag: 75ae32bd-4cad-4c34-8195-f38413bb3964
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YearQuarterSort]
+
+	column QuarterStartDate
+		formatString: yyyy-mm-dd
+		lineageTag: 56dad43e-01a1-4b56-855b-129e6d1d47d9
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [QuarterStartDate]
+
+	column MonthNo
+		isHidden
+		lineageTag: 955a4c1e-e0c1-4b10-9b1e-56c05d58e787
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [MonthNo]
+
+	column MonthName
+		lineageTag: d8d98caa-3b14-457e-9db7-d983027f5e47
+		isNameInferred
+		sourceColumn: [MonthName]
+		sortByColumn: MonthNo
+
+	column YearMonth
+		lineageTag: bacea52d-4e9e-4288-a4c3-3bfcbbea9885
+		isNameInferred
+		sourceColumn: [YearMonth]
+		sortByColumn: YearMonthSort
+
+	column YearMonthSort
+		isHidden
+		lineageTag: 12067a14-da29-4ad3-b488-88c728750d10
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [YearMonthSort]
+
+	column WeekStartDate
+		formatString: yyyy-mm-dd
+		lineageTag: 0a11a862-a6fa-4417-97dd-6946f7071e52
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [WeekStartDate]
+
+	column IsPast
+		lineageTag: 79567d8a-6c29-4154-91ae-98943a868944
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [IsPast]
+
+	partition dim_date = calculated
+		mode: import
+		source =
+				
+				VAR _Start = DATE ( 2023, 1, 1 )
+				VAR _End   = DATE ( 2027, 12, 31 )
+				VAR _AsOf  = DATE ( 2026, 9, 30 )   -- 'today' in the synthetic dataset
+				RETURN
+				    ADDCOLUMNS (
+				        CALENDAR ( _Start, _End ),
+				        "Year", YEAR ( [Date] ),
+				        "QuarterNo", QUARTER ( [Date] ),
+				        "YearQuarter", YEAR ( [Date] ) & " Q" & QUARTER ( [Date] ),
+				        "YearQuarterSort", YEAR ( [Date] ) * 10 + QUARTER ( [Date] ),
+				        "QuarterStartDate", DATE ( YEAR ( [Date] ), ( QUARTER ( [Date] ) - 1 ) * 3 + 1, 1 ),
+				        "MonthNo", MONTH ( [Date] ),
+				        "MonthName", FORMAT ( [Date], "MMM" ),
+				        "YearMonth", FORMAT ( [Date], "YYYY-MM" ),
+				        "YearMonthSort", YEAR ( [Date] ) * 100 + MONTH ( [Date] ),
+				        "WeekStartDate", [Date] - WEEKDAY ( [Date], 3 ),
+				        "IsPast", IF ( [Date] <= _AsOf, 1, 0 )
+				    )
+

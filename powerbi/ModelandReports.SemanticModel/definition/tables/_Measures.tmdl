@@ -1,0 +1,371 @@
+/// Home table for all measures.
+table _Measures
+	lineageTag: 87ed948b-2acb-4505-b00c-b5b6a5262337
+
+	/// Total ARR on opportunity lines. Header filters (date, theater, stage, account...) reach the lines through fct_opportunity; product filters apply to the lines directly.
+	measure ARR = SUM ( fct_opportunity_line[ARR_USD] )
+		formatString: \$#,0
+		displayFolder: 1. ARR
+		lineageTag: bc31db65-9163-44e6-9a58-f80203294b3c
+
+	/// ARR of Closed Won deals. Stage and forecast-category filters on the page are cleared first, so the measure is correct on any page.
+	measure 'ARR Won' =
+			CALCULATE (
+			    [ARR],
+			    REMOVEFILTERS ( dim_stage ),
+			    REMOVEFILTERS ( dim_forecast_category ),
+			    dim_stage[StageName] = "Closed Won"
+			)
+		formatString: \$#,0
+		displayFolder: 1. ARR
+		lineageTag: 44f5ecc3-27e9-4849-83de-fc20c92bb759
+
+	/// ARR of Closed Lost deals, ignoring page-level stage and forecast-category filters.
+	measure 'ARR Lost' =
+			CALCULATE (
+			    [ARR],
+			    REMOVEFILTERS ( dim_stage ),
+			    REMOVEFILTERS ( dim_forecast_category ),
+			    dim_stage[StageName] = "Closed Lost"
+			)
+		formatString: \$#,0
+		displayFolder: 1. ARR
+		lineageTag: e18f1adf-6f4f-46b2-9aae-a7a7772834c9
+
+	/// Number of opportunities. Counted on the line table so that product filters are respected as well as header filters.
+	measure Opps = DISTINCTCOUNT ( fct_opportunity_line[OpportunityId] )
+		formatString: #,0
+		displayFolder: 2. Deal Counts
+		lineageTag: 1d3d2d3c-1d69-4996-8bf2-f6ec34014418
+
+	measure 'Opps Won' =
+			CALCULATE (
+			    [Opps],
+			    REMOVEFILTERS ( dim_stage ),
+			    REMOVEFILTERS ( dim_forecast_category ),
+			    dim_stage[StageName] = "Closed Won"
+			)
+		formatString: #,0
+		displayFolder: 2. Deal Counts
+		lineageTag: 94901331-6107-4a9e-94af-996cfd14a045
+
+	measure 'Opps Lost' =
+			CALCULATE (
+			    [Opps],
+			    REMOVEFILTERS ( dim_stage ),
+			    REMOVEFILTERS ( dim_forecast_category ),
+			    dim_stage[StageName] = "Closed Lost"
+			)
+		formatString: #,0
+		displayFolder: 2. Deal Counts
+		lineageTag: 22b06435-636f-4f2c-85e2-d2196040c4ab
+
+	/// Value-based win rate: ARR won / (ARR won + ARR lost).
+	measure 'Win Rate %' = DIVIDE ( [ARR Won], [ARR Won] + [ARR Lost] )
+		formatString: 0.0%
+		displayFolder: 3. Win Rates
+		lineageTag: 10179eac-41a5-48c6-b01c-1354b141e9a2
+
+	/// Count-based win rate: deals won / deals closed.
+	measure 'Win Rate % (Count)' = DIVIDE ( [Opps Won], [Opps Won] + [Opps Lost] )
+		formatString: 0.0%
+		displayFolder: 3. Win Rates
+		lineageTag: 8efe2e0b-6ddb-4508-94fa-39bcbc9a567d
+
+	measure 'Avg Deal Size (Won)' = DIVIDE ( [ARR Won], [Opps Won] )
+		formatString: \$#,0
+		displayFolder: 4. Deal Metrics
+		lineageTag: 5c5c206b-ac92-4433-8112-046c1dc30092
+
+	/// Average days from creation to close for won deals. Deal IDs are taken from the line table so product filters apply, then passed to the header with TREATAS.
+	measure 'Avg Sales Cycle (Days, Won)' =
+			VAR WonDeals =
+			    CALCULATETABLE (
+			        VALUES ( fct_opportunity_line[OpportunityId] ),
+			        REMOVEFILTERS ( dim_stage ),
+			        dim_stage[StageName] = "Closed Won"
+			    )
+			RETURN
+			    CALCULATE (
+			        AVERAGE ( fct_opportunity[AgeDays] ),
+			        REMOVEFILTERS ( dim_stage ),
+			        TREATAS ( WonDeals, fct_opportunity[OpportunityId] )
+			    )
+		formatString: #,0
+		displayFolder: 4. Deal Metrics
+		lineageTag: 31ac5e6d-b30f-402a-8667-96fbe57ef1a5
+
+	measure Target = SUM ( fct_sales_target[TargetUSD] )
+		formatString: \$#,0
+		displayFolder: 5. Targets & Attainment
+		lineageTag: d767fa30-9232-4771-aab5-52df1657f7b7
+
+	/// ARR won divided by the target of quarters that have started.
+	measure 'Attainment %' = DIVIDE ( [ARR Won], [Target to Date] )
+		formatString: 0.0%
+		displayFolder: 5. Targets & Attainment
+		lineageTag: 2a89c0be-6026-46a3-ac6d-055f7a7b6935
+
+	measure 'Gap to Target' = [ARR Won] - [Target to Date]
+		formatString: \$#,0;-\$#,0
+		displayFolder: 5. Targets & Attainment
+		lineageTag: 20db0e9e-6717-4845-a007-6abf302dfde7
+
+	/// Traffic-light colour for conditional formatting: green >= 100%, amber 80-100%, red < 80%.
+	measure 'Attainment Color' =
+			VAR a = [Attainment %]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( a ), "#9CA3AF",
+			        a >= 1,       "#00CC8F",
+			        a >= 0.8,     "#F8B600",
+			        "#E2008F"
+			    )
+		displayFolder: 5. Targets & Attainment
+		lineageTag: 276ba462-080e-4acc-96d6-e1dfd3e27389
+
+	/// ARR won in the previous quarter.
+	measure 'ARR Won PQ' = CALCULATE ( [ARR Won], DATEADD ( dim_date[Date], -1, QUARTER ) )
+		formatString: \$#,0
+		displayFolder: 6. Time Comparison
+		lineageTag: 27a1c4c8-4e64-43b6-a58d-0778eafcc7bf
+
+	measure 'ARR Won QoQ %' =
+			IF (
+			    NOT ISBLANK ( [ARR Won] ),
+			    DIVIDE ( [ARR Won] - [ARR Won PQ], [ARR Won PQ] )
+			)
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 6. Time Comparison
+		lineageTag: ceb07729-a725-4942-8173-c8134634cec2
+
+	/// ARR won in the same period last year, limited to dates up to the as-of date so a partial year is compared with the same months of the prior year.
+	measure 'ARR Won PY' =
+			CALCULATE (
+			    [ARR Won],
+			    CALCULATETABLE ( SAMEPERIODLASTYEAR ( dim_date[Date] ), dim_date[IsPast] = 1 )
+			)
+		formatString: \$#,0
+		displayFolder: 6. Time Comparison
+		lineageTag: bcdb5d79-b6e2-47a0-9ee5-61a129bdbbcc
+
+	measure 'ARR Won YoY %' =
+			IF (
+			    NOT ISBLANK ( [ARR Won] ),
+			    DIVIDE ( [ARR Won] - [ARR Won PY], [ARR Won PY] )
+			)
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: 6. Time Comparison
+		lineageTag: 93f8420f-84f5-42b4-af6a-3878f10fb888
+
+	measure 'ARR Won YTD' = TOTALYTD ( [ARR Won], dim_date[Date] )
+		formatString: \$#,0
+		displayFolder: 6. Time Comparison
+		lineageTag: 028d383b-05de-423e-9637-28edf342f6be
+
+	/// Open pipeline ARR at the latest weekly snapshot inside the current date context. On a weekly axis it gives the pipeline trend; on a card it gives today's pipeline.
+	measure 'Pipeline ARR' =
+			VAR LastSnapshot = MAX ( fct_pipeline_snapshot[SnapshotDate] )
+			RETURN
+			    CALCULATE (
+			        SUM ( fct_pipeline_snapshot[ARR_USD] ),
+			        fct_pipeline_snapshot[SnapshotDate] = LastSnapshot
+			    )
+		formatString: \$#,0
+		displayFolder: 7. Pipeline
+		lineageTag: b75d2658-a5bc-44cf-9dea-0aa71981da45
+
+	measure 'Pipeline Opps' =
+			VAR LastSnapshot = MAX ( fct_pipeline_snapshot[SnapshotDate] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( fct_pipeline_snapshot[OpportunityId] ),
+			        fct_pipeline_snapshot[SnapshotDate] = LastSnapshot
+			    )
+		formatString: #,0
+		displayFolder: 7. Pipeline
+		lineageTag: ef554862-507e-4d39-88cc-e63c2075a044
+
+	/// Current open pipeline (latest snapshot) whose expected close date falls in the selected period. The date selection is moved from SnapshotDate to CloseDate with TREATAS.
+	measure 'Pipeline ARR Closing in Period' =
+			VAR PeriodDates = VALUES ( dim_date[Date] )
+			VAR LastSnapshot =
+			    CALCULATE ( MAX ( fct_pipeline_snapshot[SnapshotDate] ), REMOVEFILTERS ( dim_date ) )
+			RETURN
+			    CALCULATE (
+			        SUM ( fct_pipeline_snapshot[ARR_USD] ),
+			        REMOVEFILTERS ( dim_date ),
+			        fct_pipeline_snapshot[SnapshotDate] = LastSnapshot,
+			        TREATAS ( PeriodDates, fct_pipeline_snapshot[CloseDate] )
+			    )
+		formatString: \$#,0
+		displayFolder: 7. Pipeline
+		lineageTag: 94c20ae4-f625-4706-a78d-c110c70e419d
+
+	/// Open pipeline closing in the period divided by the target for that period. 3x is a common health benchmark.
+	measure 'Pipeline Coverage Ratio' = DIVIDE ( [Pipeline ARR Closing in Period], [Target] )
+		formatString: 0.00"x"
+		displayFolder: 7. Pipeline
+		lineageTag: 959751cf-9af1-40f9-9b32-ad716d33a0ab
+
+	/// Deals lost, counted by the stage they were in when lost. Use with fct_stage_history[FromStage] on the axis.
+	measure 'Opps Lost at Stage' =
+			CALCULATE (
+			    DISTINCTCOUNT ( fct_stage_history[OpportunityId] ),
+			    fct_stage_history[ToStage] = "Closed Lost"
+			)
+		formatString: #,0
+		displayFolder: 8. Loss Analysis
+		lineageTag: fee225cc-e974-47eb-b8fc-af4beebbf1f5
+
+	/// ARR of deals lost from each stage: lost deal IDs come from the stage history and are applied to the ARR lines with TREATAS.
+	measure 'ARR Lost at Stage' =
+			VAR LostDeals =
+			    CALCULATETABLE (
+			        VALUES ( fct_stage_history[OpportunityId] ),
+			        fct_stage_history[ToStage] = "Closed Lost"
+			    )
+			RETURN
+			    CALCULATE ( [ARR], TREATAS ( LostDeals, fct_opportunity[OpportunityId] ) )
+		formatString: \$#,0
+		displayFolder: 8. Loss Analysis
+		lineageTag: 749dfc1f-3aba-4d73-bf32-a78019fd607d
+
+	/// Closed deals that ever reached the stage(s) in context, from the stage history.
+	measure 'Opps Reached Stage' =
+			VAR Stages = VALUES ( dim_stage[StageName] )
+			RETURN
+			    CALCULATE (
+			        DISTINCTCOUNT ( fct_stage_history[OpportunityId] ),
+			        REMOVEFILTERS ( dim_stage ),
+			        fct_opportunity[IsClosed] = 1,
+			        TREATAS ( Stages, fct_stage_history[ToStage] )
+			    )
+		formatString: #,0
+		displayFolder: 8. Loss Analysis
+		lineageTag: 2534a6f9-aa8c-42f8-9fc3-fd4d83b25ad4
+
+	/// Share of closed deals that reached this stage and moved on to the next one (Negotiation converts to Closed Won). Use with dim_stage[StageName] on the axis.
+	measure 'Stage Conversion %' =
+			VAR CurrentOrder = SELECTEDVALUE ( dim_stage[StageOrder] )
+			VAR Reached = [Opps Reached Stage]
+			VAR ReachedNext =
+			    CALCULATE ( [Opps Reached Stage], REMOVEFILTERS ( dim_stage ), dim_stage[StageOrder] = CurrentOrder + 1 )
+			RETURN
+			    IF ( CurrentOrder <= 5, DIVIDE ( ReachedNext, Reached ) )
+		formatString: 0.0%
+		displayFolder: 8. Loss Analysis
+		lineageTag: ccac8c06-4eb3-4278-ad05-ab90ffe63b52
+
+	measure 'Loss Rate %' = DIVIDE ( [ARR Lost], [ARR Won] + [ARR Lost] )
+		formatString: 0.0%
+		displayFolder: 3. Win Rates
+		lineageTag: 8fd22882-36e1-4140-b76d-46e88bbc5b27
+
+	measure 'Account Rank (ARR Won)' =
+			IF (
+			    ISINSCOPE ( dim_account[AccountName] ) && NOT ISBLANK ( [ARR Won] ),
+			    RANKX ( ALLSELECTED ( dim_account[AccountName] ), [ARR Won], , DESC, DENSE )
+			)
+		formatString: 0
+		displayFolder: 9. Pareto
+		lineageTag: 7d7efa32-c4cb-4869-951b-d4760e2e3aac
+
+	/// Running share of won ARR when accounts are ranked from largest to smallest (Pareto curve).
+	measure 'Cumulative ARR Won %' =
+			VAR CurrentRank = [Account Rank (ARR Won)]
+			VAR RunningTotal =
+			    CALCULATE (
+			        [ARR Won],
+			        FILTER (
+			            ALLSELECTED ( dim_account[AccountName] ),
+			            [Account Rank (ARR Won)] <= CurrentRank
+			        )
+			    )
+			VAR GrandTotal = CALCULATE ( [ARR Won], ALLSELECTED ( dim_account[AccountName] ) )
+			RETURN
+			    IF ( NOT ISBLANK ( CurrentRank ), DIVIDE ( RunningTotal, GrandTotal ) )
+		formatString: 0.0%
+		displayFolder: 9. Pareto
+		lineageTag: d8b0cc3b-29fb-4a44-a0e9-9b332645e876
+
+	/// 1 for accounts that together make up the first 80% of won ARR.
+	measure 'Top 80% Account Flag' = IF ( NOT ISBLANK ( [Cumulative ARR Won %] ), IF ( [Cumulative ARR Won %] <= 0.8, 1, 0 ) )
+		formatString: 0
+		displayFolder: 9. Pareto
+		lineageTag: c08c2048-d9e5-41ed-894b-c14c6baa1ba8
+
+	/// Capacity of the unique plants linked to the deals in context. Filters travel deal -> bridge -> plant (CROSSFILTER), and summing on dim_plant counts each plant once even if several deals share it.
+	measure 'Plant MWp' =
+			CALCULATE (
+			    SUM ( dim_plant[PlantMWp] ),
+			    CROSSFILTER ( bridge_opportunity_plant[PlantId], dim_plant[PlantId], BOTH )
+			)
+		formatString: #,0.0
+		displayFolder: 10. Plants
+		lineageTag: 0b582f56-68e8-47cf-b7b6-98f20bf618eb
+
+	measure 'Audited Fields' = COUNTROWS ( fct_data_quality_audit )
+		formatString: #,0
+		displayFolder: 11. Data Quality
+		lineageTag: 7fae0f72-2841-452b-bb2f-d6128685ed1c
+
+	measure 'Missing Fields' = SUM ( fct_data_quality_audit[IsMissing] )
+		formatString: #,0
+		displayFolder: 11. Data Quality
+		lineageTag: 8e4f6448-1bd3-4baf-a1da-c40fc075aa2c
+
+	/// Share of audited CRM fields that are empty. Slice by Attribute, AuditGroup, RecordStatus, rep or period.
+	measure '% Missing' = DIVIDE ( [Missing Fields], [Audited Fields] )
+		formatString: 0.0%
+		displayFolder: 11. Data Quality
+		lineageTag: aa49f7dc-2be8-4e2c-a93e-0ce27d13d22d
+
+	measure 'Opps with Missing Data' =
+			CALCULATE (
+			    DISTINCTCOUNT ( fct_data_quality_audit[OpportunityId] ),
+			    fct_data_quality_audit[IsMissing] = 1
+			)
+		formatString: #,0
+		displayFolder: 11. Data Quality
+		lineageTag: cc1f1c01-a22f-42a7-bf30-194c292b7d62
+
+	measure '% Opps Fully Complete' =
+			VAR Audited = DISTINCTCOUNT ( fct_data_quality_audit[OpportunityId] )
+			RETURN
+			    DIVIDE ( Audited - [Opps with Missing Data], Audited )
+		formatString: 0.0%
+		displayFolder: 11. Data Quality
+		lineageTag: 946516bf-cda4-43a0-b6ea-57f6463d2952
+
+	/// Colour for the accountability matrix: green < 15%, amber 15-30%, red > 30%.
+	measure '% Missing Color' =
+			VAR m = [% Missing]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( m ), "#9CA3AF",
+			        m < 0.15,     "#00CC8F",
+			        m < 0.30,     "#F8B600",
+			        "#E2008F"
+			    )
+		displayFolder: 11. Data Quality
+		lineageTag: 55fd0a8c-2c73-4b02-be90-d7fe633ff97a
+
+	/// Target for quarters that have already started (up to the dataset as-of date), so partial years are compared fairly.
+	measure 'Target to Date' = CALCULATE ( [Target], dim_date[IsPast] = 1 )
+		formatString: \$#,0
+		displayFolder: 5. Targets & Attainment
+		lineageTag: 70c70b9e-91e1-4f99-bd04-0a6e81b38c18
+
+	column _placeholder
+		isHidden
+		lineageTag: 9544a465-5ec0-48d6-b980-44e1d46976ed
+		isNameInferred
+		sourceColumn: [_placeholder]
+
+	partition _Measures = calculated
+		mode: import
+		source = ROW ( "_placeholder", BLANK () )
+

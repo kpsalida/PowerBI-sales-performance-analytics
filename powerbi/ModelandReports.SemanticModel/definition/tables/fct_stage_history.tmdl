@@ -1,0 +1,52 @@
+table fct_stage_history
+	lineageTag: 14263d67-497b-4bed-93a6-20a60acf5d60
+
+	column OpportunityId
+		dataType: string
+		isHidden
+		lineageTag: 4197bc54-ced9-42b5-8980-1ed94f03040d
+		summarizeBy: none
+		sourceColumn: OpportunityId
+
+		annotation SummarizationSetBy = Automatic
+
+	column FromStage
+		dataType: string
+		lineageTag: 125d1bf0-9040-4ea6-a5f9-a601c84e1f2e
+		summarizeBy: none
+		sourceColumn: FromStage
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToStage
+		dataType: string
+		lineageTag: 545a6146-b70f-4f89-8531-91ccaaa08102
+		summarizeBy: none
+		sourceColumn: ToStage
+
+		annotation SummarizationSetBy = Automatic
+
+	column ChangeDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 02baa5bc-4f65-4069-9022-c86b620ee14b
+		summarizeBy: none
+		sourceColumn: ChangeDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition fct_stage_history = m
+		mode: import
+		queryGroup: 2_DataModel
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "fct_stage_history.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"OpportunityId", type text}, {"FromStage", type text}, {"ToStage", type text}, {"ChangeDate", type date}}, "en-US")
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

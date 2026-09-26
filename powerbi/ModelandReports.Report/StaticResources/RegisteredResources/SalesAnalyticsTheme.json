@@ -1,0 +1,74 @@
+{
+  "name": "SalesAnalyticsTheme",
+  "dataColors": [
+    "#074DFF",
+    "#05071F",
+    "#55C1FF",
+    "#00CC8F",
+    "#F8B600",
+    "#E2008F",
+    "#094780",
+    "#85BAE0",
+    "#3DEE86",
+    "#A0C7E5"
+  ],
+  "foreground": "#05071F",
+  "foregroundNeutralSecondary": "#605E5C",
+  "background": "#FFFFFF",
+  "backgroundLight": "#F3F2F0",
+  "backgroundNeutral": "#E0EFFD",
+  "tableAccent": "#074DFF",
+  "good": "#00CC8F",
+  "neutral": "#F8B600",
+  "bad": "#E2008F",
+  "maximum": "#074DFF",
+  "center": "#55C1FF",
+  "minimum": "#ECF6FF",
+  "textClasses": {
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "color": "#05071F"
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#141413"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 11,
+      "color": "#141413"
+    },
+    "label": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 9,
+      "color": "#05071F"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [
+          {
+            "fontFamily": "Segoe UI Semibold",
+            "fontSize": 11,
+            "fontColor": {
+              "solid": {
+                "color": "#141413"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "color": {
+              "solid": {
+                "color": "#0E1561"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 220
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 752.5,
+            "y": 615
+          },
+          "nodeIndex": "fct_opportunity",
+          "nodeLineageTag": "2d6b70ef-8244-48b8-8be2-bfb3221c21d5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 402.75,
+            "y": 604.25
+          },
+          "nodeIndex": "fct_opportunity_line",
+          "nodeLineageTag": "55826154-2d08-466d-b204-047c1585d32a",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 88,
+            "y": 355.5
+          },
+          "nodeIndex": "fct_pipeline_snapshot",
+          "nodeLineageTag": "6113a930-2e21-4bb8-97db-f43c1d073460",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1539.5,
+            "y": 1431.25
+          },
+          "nodeIndex": "fct_sales_target",
+          "nodeLineageTag": "09a73976-7459-4d80-9b2e-904c16f9d275",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 411,
+            "y": 1508.25
+          },
+          "nodeIndex": "fct_stage_history",
+          "nodeLineageTag": "14263d67-497b-4bed-93a6-20a60acf5d60",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 20
+        },
+        {
+          "location": {
+            "x": 1413.75,
+            "y": 916
+          },
+          "nodeIndex": "bridge_opportunity_plant",
+          "nodeLineageTag": "0e05e023-f07f-4c48-89e7-5b0897211da9",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 640.25,
+            "y": 0
+          },
+          "nodeIndex": "dim_account",
+          "nodeLineageTag": "a4ba209b-5f8b-4fec-beaa-bf8ba556adc4",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 18
+        },
+        {
+          "location": {
+            "x": 1173,
+            "y": 42.5
+          },
+          "nodeIndex": "dim_competitor",
+          "nodeLineageTag": "c6c6cf00-4d85-49d7-922f-102cb8e51248",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1268.25,
+            "y": 0
+          },
+          "nodeIndex": "dim_country",
+          "nodeLineageTag": "e3df8327-3160-406b-887b-a9955f4a78ce",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1697.25,
+            "y": 409.75
+          },
+          "nodeIndex": "dim_forecast_category",
+          "nodeLineageTag": "74f11764-ee95-48f6-84c9-2464d82e04bb",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 1035,
+            "y": 1019.75
+          },
+          "nodeIndex": "dim_loss_reason",
+          "nodeLineageTag": "0639c5f0-da49-49d9-9ed0-791a8abc9b31",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 1567.75,
+            "y": 48.5
+          },
+          "nodeIndex": "dim_order_type",
+          "nodeLineageTag": "50c4f5b0-a6c2-4717-9914-3596e98280c2",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 1713,
+            "y": 876
+          },
+          "nodeIndex": "dim_plant",
+          "nodeLineageTag": "9eda20d8-0058-4998-8370-a5fd9fa438bd",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 998.25,
+            "y": 1207.75
+          },
+          "nodeIndex": "dim_product",
+          "nodeLineageTag": "b5e01d40-6c96-4550-b21d-d98b2559a9b8",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 19
+        },
+        {
+          "location": {
+            "x": 1891,
+            "y": 262.75
+          },
+          "nodeIndex": "dim_sales_rep",
+          "nodeLineageTag": "16f921f0-c95f-4101-877c-0d6809dac30c",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 372.5,
+            "y": 70
+          },
+          "nodeIndex": "dim_stage",
+          "nodeLineageTag": "cd6cf7e3-83c5-4712-b68f-028037f4c719",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 15
+        },
+        {
+          "location": {
+            "x": 842.75,
+            "y": 1429.75
+          },
+          "nodeIndex": "dim_theater",
+          "nodeLineageTag": "25e803db-0213-44d5-868e-909387ac8625",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 16
+        },
+        {
+          "location": {
+            "x": 156.25,
+            "y": 1246.25
+          },
+          "nodeIndex": "fct_data_quality_audit",
+          "nodeLineageTag": "e7a69efe-a23a-4cc3-911f-f981ba7a048d",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 17
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 910.75
+          },
+          "nodeIndex": "dim_date",
+          "nodeLineageTag": "e1cdb47d-70c0-4437-95a1-0bcad4371b2e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1271.5,
+            "y": 1190.5
+          },
+          "nodeIndex": "dim_product_type",
+          "nodeLineageTag": "e1b023e9-3ae7-4f76-a6df-12d00421422d",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 2087,
+            "y": 742.125
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "87ed948b-2acb-4505-b00c-b5b6a5262337",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 80,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

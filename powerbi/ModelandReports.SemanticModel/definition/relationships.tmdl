@@ -1,0 +1,117 @@
+relationship AutoDetected_2ed39b36-32b2-484c-91ec-9e6b63acb9f4
+	fromColumn: fct_opportunity_line.OpportunityId
+	toColumn: fct_opportunity.OpportunityId
+
+relationship AutoDetected_2fbc0ea4-e5a9-4c8d-b198-e04e6bde74d9
+	fromColumn: fct_stage_history.OpportunityId
+	toColumn: fct_opportunity.OpportunityId
+
+relationship AutoDetected_58be2ff0-0c33-4bad-9fd5-1c85d1ec357d
+	fromColumn: fct_opportunity.ForecastCategory
+	toColumn: dim_forecast_category.ForecastCategory
+
+relationship AutoDetected_d8fc6a8e-5433-4f40-b504-dc5c14c58902
+	fromColumn: fct_pipeline_snapshot.ForecastCategory
+	toColumn: dim_forecast_category.ForecastCategory
+
+relationship AutoDetected_c0765375-2f41-47f9-835c-82f20c3f11f4
+	fromColumn: fct_opportunity.StageName
+	toColumn: dim_stage.StageName
+
+relationship AutoDetected_0c40e68c-a2b7-47ab-8b2c-a5af6c1fc8d2
+	fromColumn: fct_pipeline_snapshot.StageName
+	toColumn: dim_stage.StageName
+
+relationship AutoDetected_503490c4-0656-4ec0-8580-c65bda1c43a2
+	fromColumn: fct_opportunity.Theater
+	toColumn: dim_theater.Theater
+
+relationship AutoDetected_5248af7b-3c9b-4d57-990f-3c648411e0ff
+	fromColumn: fct_sales_target.Theater
+	toColumn: dim_theater.Theater
+
+relationship AutoDetected_03b6e437-15b3-4e8b-8a5c-d093f52d35f5
+	fromColumn: fct_data_quality_audit.OpportunityId
+	toColumn: fct_opportunity.OpportunityId
+
+relationship fct_opportunity_CloseDate_dim_date_Date
+	fromColumn: fct_opportunity.CloseDate
+	toColumn: dim_date.Date
+
+relationship fct_opportunity_CreatedDate_dim_date_Date
+	isActive: false
+	fromColumn: fct_opportunity.CreatedDate
+	toColumn: dim_date.Date
+
+relationship fct_opportunity_AccountId_dim_account_AccountId
+	fromColumn: fct_opportunity.AccountId
+	toColumn: dim_account.AccountId
+
+relationship fct_opportunity_OwnerId_dim_sales_rep_RepId
+	fromColumn: fct_opportunity.OwnerId
+	toColumn: dim_sales_rep.RepId
+
+relationship fct_opportunity_OrderType_dim_order_type_OrderType
+	fromColumn: fct_opportunity.OrderType
+	toColumn: dim_order_type.OrderType
+
+relationship fct_opportunity_PrimaryCompetitorId_dim_competitor_CompetitorId
+	fromColumn: fct_opportunity.PrimaryCompetitorId
+	toColumn: dim_competitor.CompetitorId
+
+relationship fct_opportunity_LossReason_dim_loss_reason_LossReason
+	fromColumn: fct_opportunity.LossReason
+	toColumn: dim_loss_reason.LossReason
+
+relationship dim_account_CountryCode_dim_country_CountryCode
+	fromColumn: dim_account.CountryCode
+	toColumn: dim_country.CountryCode
+
+relationship fct_opportunity_line_ProductId_dim_product_ProductId
+	fromColumn: fct_opportunity_line.ProductId
+	toColumn: dim_product.ProductId
+
+relationship dim_product_ProductType_dim_product_type_ProductType
+	fromColumn: dim_product.ProductType
+	toColumn: dim_product_type.ProductType
+
+relationship bridge_opportunity_plant_OpportunityId_fct_opportunity_OpportunityId
+	fromColumn: bridge_opportunity_plant.OpportunityId
+	toColumn: fct_opportunity.OpportunityId
+
+relationship bridge_opportunity_plant_PlantId_dim_plant_PlantId
+	fromColumn: bridge_opportunity_plant.PlantId
+	toColumn: dim_plant.PlantId
+
+relationship fct_pipeline_snapshot_SnapshotDate_dim_date_Date
+	fromColumn: fct_pipeline_snapshot.SnapshotDate
+	toColumn: dim_date.Date
+
+relationship fct_pipeline_snapshot_AccountId_dim_account_AccountId
+	fromColumn: fct_pipeline_snapshot.AccountId
+	toColumn: dim_account.AccountId
+
+relationship fct_pipeline_snapshot_OwnerId_dim_sales_rep_RepId
+	fromColumn: fct_pipeline_snapshot.OwnerId
+	toColumn: dim_sales_rep.RepId
+
+relationship fct_pipeline_snapshot_Theater_dim_theater_Theater
+	fromColumn: fct_pipeline_snapshot.Theater
+	toColumn: dim_theater.Theater
+
+relationship fct_pipeline_snapshot_OrderType_dim_order_type_OrderType
+	fromColumn: fct_pipeline_snapshot.OrderType
+	toColumn: dim_order_type.OrderType
+
+relationship fct_pipeline_snapshot_PrimaryProductType_dim_product_type_ProductType
+	fromColumn: fct_pipeline_snapshot.PrimaryProductType
+	toColumn: dim_product_type.ProductType
+
+relationship fct_sales_target_QuarterStartDate_dim_date_Date
+	fromColumn: fct_sales_target.QuarterStartDate
+	toColumn: dim_date.Date
+
+relationship fct_sales_target_ProductType_dim_product_type_ProductType
+	fromColumn: fct_sales_target.ProductType
+	toColumn: dim_product_type.ProductType
+

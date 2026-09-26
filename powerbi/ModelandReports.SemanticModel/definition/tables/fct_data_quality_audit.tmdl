@@ -1,0 +1,58 @@
+table fct_data_quality_audit
+	lineageTag: e7a69efe-a23a-4cc3-911f-f981ba7a048d
+
+	column OpportunityId
+		dataType: string
+		isHidden
+		lineageTag: 900600dd-b019-4fb0-9f81-fa5f5ef86e2d
+		summarizeBy: none
+		sourceColumn: OpportunityId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Attribute
+		dataType: string
+		lineageTag: 6241d0ff-1157-49c4-aa2f-90f30ae163a9
+		summarizeBy: none
+		sourceColumn: Attribute
+
+		annotation SummarizationSetBy = Automatic
+
+	column AuditGroup
+		dataType: string
+		lineageTag: 4cadcda6-647c-4f55-af6b-0e4e4a44337f
+		summarizeBy: none
+		sourceColumn: AuditGroup
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsMissing
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 09d5d4c3-a0c9-4869-b5b2-50badabf3ba3
+		summarizeBy: sum
+		sourceColumn: IsMissing
+
+		annotation SummarizationSetBy = Automatic
+
+	column RecordStatus
+		dataType: string
+		lineageTag: f0b0cc20-505c-497f-b683-c98a44ca690b
+		summarizeBy: none
+		sourceColumn: RecordStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_data_quality_audit = m
+		mode: import
+		queryGroup: 2_DataModel
+		source =
+				// Loaded from the staging layer - all cleaning happens in stg_DataQualityAudit
+				let
+				    Source = stg_DataQualityAudit
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

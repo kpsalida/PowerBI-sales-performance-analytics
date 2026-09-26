@@ -1,0 +1,48 @@
+table dim_competitor
+	lineageTag: c6c6cf00-4d85-49d7-922f-102cb8e51248
+
+	column CompetitorId
+		dataType: string
+		lineageTag: df08a001-22d7-4c3a-8510-74643ab3f069
+		summarizeBy: none
+		sourceColumn: CompetitorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompetitorName
+		dataType: string
+		lineageTag: 6477f5ec-f871-4161-b3c7-d43ce836931b
+		summarizeBy: none
+		sourceColumn: CompetitorName
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompetitorType
+		dataType: string
+		lineageTag: bb709fc8-c080-4c06-8066-60c6c4f1881f
+		summarizeBy: none
+		sourceColumn: CompetitorType
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductFocus
+		dataType: string
+		lineageTag: f87826ab-ab07-4e91-98f8-258c11aa0dbd
+		summarizeBy: none
+		sourceColumn: ProductFocus
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_competitor = m
+		mode: import
+		queryGroup: 2_DataModel
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "dim_competitor.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"CompetitorId", type text}, {"CompetitorName", type text}, {"CompetitorType", type text}, {"ProductFocus", type text}}, "en-US")
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

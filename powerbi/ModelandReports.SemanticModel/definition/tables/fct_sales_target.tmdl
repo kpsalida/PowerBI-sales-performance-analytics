@@ -1,0 +1,64 @@
+table fct_sales_target
+	lineageTag: 09a73976-7459-4d80-9b2e-904c16f9d275
+
+	column QuarterStartDate
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 9c5b2c49-d85d-480d-8c38-96ce95c89f8c
+		summarizeBy: none
+		sourceColumn: QuarterStartDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column YearQuarter
+		dataType: string
+		isHidden
+		lineageTag: 6ac0c51b-a828-4c81-975a-9870ed5c832e
+		summarizeBy: none
+		sourceColumn: YearQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Theater
+		dataType: string
+		isHidden
+		lineageTag: 0fc88ab2-48da-4565-86a4-6684dd59dbb0
+		summarizeBy: none
+		sourceColumn: Theater
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductType
+		dataType: string
+		isHidden
+		lineageTag: 54fdc40d-53fe-4c38-87c7-7fd9f781a584
+		summarizeBy: none
+		sourceColumn: ProductType
+
+		annotation SummarizationSetBy = Automatic
+
+	column TargetUSD
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e5c96f02-a6b4-4926-990c-3917fe51ebc7
+		summarizeBy: sum
+		sourceColumn: TargetUSD
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_sales_target = m
+		mode: import
+		queryGroup: 2_DataModel
+		source =
+				// Loaded from the staging layer - all cleaning happens in stg_SalesTargets
+				let
+				    Source = stg_SalesTargets
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

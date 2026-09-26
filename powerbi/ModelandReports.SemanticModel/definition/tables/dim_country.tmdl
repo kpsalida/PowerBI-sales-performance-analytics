@@ -1,0 +1,48 @@
+table dim_country
+	lineageTag: e3df8327-3160-406b-887b-a9955f4a78ce
+
+	column CountryCode
+		dataType: string
+		lineageTag: 06c32a23-c59e-416a-97e4-934b9e8a6ddf
+		summarizeBy: none
+		sourceColumn: CountryCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: ea3e150d-2efe-4807-9e85-9484f2571771
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 6bda2ac4-0cba-4b80-ba95-381c5c82b925
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Theater
+		dataType: string
+		lineageTag: a65cb601-0e38-48bb-b893-d8974950177f
+		summarizeBy: none
+		sourceColumn: Theater
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_country = m
+		mode: import
+		queryGroup: 2_DataModel
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "dim_country.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"CountryCode", type text}, {"Country", type text}, {"Region", type text}, {"Theater", type text}}, "en-US")
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,210 @@
+table fct_opportunity
+	lineageTag: 2d6b70ef-8244-48b8-8be2-bfb3221c21d5
+
+	column OpportunityId
+		dataType: string
+		lineageTag: 20c87b5c-dd09-41dd-b152-3215181b3573
+		summarizeBy: none
+		sourceColumn: OpportunityId
+
+		annotation SummarizationSetBy = Automatic
+
+	column OpportunityName
+		dataType: string
+		lineageTag: ecf102b1-3575-426e-a526-8e37e2172c23
+		summarizeBy: none
+		sourceColumn: OpportunityName
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountId
+		dataType: string
+		isHidden
+		lineageTag: 4a116ede-6718-424f-af84-45aa8d5a25e7
+		summarizeBy: none
+		sourceColumn: AccountId
+
+		annotation SummarizationSetBy = Automatic
+
+	column OwnerId
+		dataType: string
+		isHidden
+		lineageTag: f5c0160c-cc66-464b-b8d7-8e025c306fdf
+		summarizeBy: none
+		sourceColumn: OwnerId
+
+		annotation SummarizationSetBy = Automatic
+
+	column Theater
+		dataType: string
+		isHidden
+		lineageTag: 5a342671-2ff0-45d4-818d-4ca653141820
+		summarizeBy: none
+		sourceColumn: Theater
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderType
+		dataType: string
+		isHidden
+		lineageTag: bffa8f31-c390-489c-ace0-b5f8cede8287
+		summarizeBy: none
+		sourceColumn: OrderType
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrimaryProductType
+		dataType: string
+		lineageTag: 5a7d7af1-1cb5-409b-b741-5f76038eb371
+		summarizeBy: none
+		sourceColumn: PrimaryProductType
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreatedDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 079169df-301f-4f31-887b-9ff02b0988b5
+		summarizeBy: none
+		sourceColumn: CreatedDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column CloseDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8ef96aee-63f2-4c73-b7d4-b9099a35be53
+		summarizeBy: none
+		sourceColumn: CloseDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column StageName
+		dataType: string
+		isHidden
+		lineageTag: 4bd9fdf1-e186-4cbd-beb6-97921218dbde
+		summarizeBy: none
+		sourceColumn: StageName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ForecastCategory
+		dataType: string
+		isHidden
+		lineageTag: fc41e34c-a4de-40c4-8e54-acdaffca4069
+		summarizeBy: none
+		sourceColumn: ForecastCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsClosed
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 110c3979-6bae-464c-8bfe-c59ec1c5c911
+		summarizeBy: sum
+		sourceColumn: IsClosed
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWon
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 22ce1bf2-8eb7-4131-a1c8-ead8e6cd06f5
+		summarizeBy: sum
+		sourceColumn: IsWon
+
+		annotation SummarizationSetBy = Automatic
+
+	column AgeDays
+		dataType: int64
+		formatString: 0
+		lineageTag: b523cd87-0c17-4735-af20-42883ad75c3b
+		summarizeBy: sum
+		sourceColumn: AgeDays
+
+		annotation SummarizationSetBy = Automatic
+
+	column PrimaryCompetitorId
+		dataType: string
+		isHidden
+		lineageTag: db615d48-90e4-4ef6-a30b-0ed6bec5243c
+		summarizeBy: none
+		sourceColumn: PrimaryCompetitorId
+
+		annotation SummarizationSetBy = Automatic
+
+	column LossReason
+		dataType: string
+		isHidden
+		lineageTag: 0e7985ce-49d4-473a-b2bd-185bdae266e3
+		summarizeBy: none
+		sourceColumn: LossReason
+
+		annotation SummarizationSetBy = Automatic
+
+	column NextStep
+		dataType: string
+		lineageTag: 402639a1-30b2-44e2-968a-da7d20d06834
+		summarizeBy: none
+		sourceColumn: NextStep
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValuePlay
+		dataType: string
+		lineageTag: 0bcf4039-ca2c-4406-b27b-06b88e271bfa
+		summarizeBy: none
+		sourceColumn: ValuePlay
+
+		annotation SummarizationSetBy = Automatic
+
+	column PlantMWp
+		dataType: double
+		lineageTag: 407d9c66-2fc8-492d-90a0-7532c591c301
+		summarizeBy: sum
+		sourceColumn: PlantMWp
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EstimatedCOD
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: dab7572c-4395-4122-b5d5-089230d57557
+		summarizeBy: none
+		sourceColumn: EstimatedCOD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MaterialDeliveryDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6d702366-fb17-4dda-9c3e-920c7a5eb0da
+		summarizeBy: none
+		sourceColumn: MaterialDeliveryDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition fct_opportunity = m
+		mode: import
+		queryGroup: 2_DataModel
+		source =
+				// Loaded from the staging layer - all cleaning happens in stg_Opportunity
+				let
+				    Source = stg_Opportunity
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

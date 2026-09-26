@@ -1,0 +1,30 @@
+/// Product type dimension shared by opportunity lines (via dim_product) and sales targets.
+table dim_product_type
+	lineageTag: e1b023e9-3ae7-4f76-a6df-12d00421422d
+
+	column ProductType
+		lineageTag: cdcebe59-78bf-4f77-8253-d8d72f6b6887
+		isNameInferred
+		sourceColumn: [ProductType]
+		sortByColumn: ProductTypeSort
+
+	column ProductTypeSort
+		isHidden
+		lineageTag: 453aa2da-e7fd-4375-bd9c-eb46ff86e534
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ProductTypeSort]
+
+	partition dim_product_type = calculated
+		mode: import
+		source =
+				
+				DATATABLE (
+				    "ProductType", STRING,
+				    "ProductTypeSort", INTEGER,
+				    {
+				        { "SaaS", 1 },
+				        { "SCADA", 2 }
+				    }
+				)
+

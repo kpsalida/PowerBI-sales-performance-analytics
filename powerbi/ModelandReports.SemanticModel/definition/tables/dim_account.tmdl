@@ -1,0 +1,57 @@
+table dim_account
+	lineageTag: a4ba209b-5f8b-4fec-beaa-bf8ba556adc4
+
+	column AccountId
+		dataType: string
+		lineageTag: e541a9ae-2e7a-4a5f-8d46-5df4546a9591
+		summarizeBy: none
+		sourceColumn: AccountId
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountName
+		dataType: string
+		lineageTag: f8977bb5-9651-4271-9776-16109634dfb4
+		summarizeBy: none
+		sourceColumn: AccountName
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryCode
+		dataType: string
+		isHidden
+		lineageTag: 19963be4-90a5-4983-b1bb-10f2f5da5c09
+		summarizeBy: none
+		sourceColumn: CountryCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Theater
+		dataType: string
+		isHidden
+		lineageTag: 8e3abb3c-a185-421b-8432-20359b34efb6
+		summarizeBy: none
+		sourceColumn: Theater
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountType
+		dataType: string
+		lineageTag: 2b085441-bd9d-421b-843c-7ee60dc6e4c5
+		summarizeBy: none
+		sourceColumn: AccountType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_account = m
+		mode: import
+		queryGroup: 2_DataModel
+		source =
+				// Loaded from the staging layer - all cleaning happens in stg_Account
+				let
+				    Source = stg_Account
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

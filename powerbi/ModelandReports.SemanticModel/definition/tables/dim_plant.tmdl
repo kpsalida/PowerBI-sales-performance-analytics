@@ -1,0 +1,77 @@
+table dim_plant
+	lineageTag: 9eda20d8-0058-4998-8370-a5fd9fa438bd
+
+	column PlantId
+		dataType: string
+		lineageTag: 8f9c8d5d-7a90-473c-b760-b5aaf81ec999
+		summarizeBy: none
+		sourceColumn: PlantId
+
+		annotation SummarizationSetBy = Automatic
+
+	column PlantName
+		dataType: string
+		lineageTag: 215a1edc-326b-433b-ad3b-ad14e748be25
+		summarizeBy: none
+		sourceColumn: PlantName
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountId
+		dataType: string
+		lineageTag: f09c4ef8-bc5e-4564-853b-2688c2fb2156
+		summarizeBy: none
+		sourceColumn: AccountId
+
+		annotation SummarizationSetBy = Automatic
+
+	column CountryCode
+		dataType: string
+		lineageTag: 00d98d84-a5ee-496b-83c6-3ff6cbadc4a8
+		summarizeBy: none
+		sourceColumn: CountryCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssetClass
+		dataType: string
+		lineageTag: 5961d900-1db9-4469-b146-fe00dbfd9cab
+		summarizeBy: none
+		sourceColumn: AssetClass
+
+		annotation SummarizationSetBy = Automatic
+
+	column PlantMWp
+		dataType: double
+		lineageTag: 81e21766-a4b0-4e87-90f1-e625efb0b731
+		summarizeBy: sum
+		sourceColumn: PlantMWp
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CommercialOperationDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: aee56a8e-f062-4420-9d4e-27949761ddef
+		summarizeBy: none
+		sourceColumn: CommercialOperationDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dim_plant = m
+		mode: import
+		queryGroup: 2_DataModel
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "dim_plant.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"PlantId", type text}, {"PlantName", type text}, {"AccountId", type text}, {"CountryCode", type text}, {"AssetClass", type text}, {"PlantMWp", type number}, {"CommercialOperationDate", type date}}, "en-US")
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
