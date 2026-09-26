@@ -10,21 +10,33 @@ model Model
 /// Settings: data folder and as-of date
 queryGroup 00_Parameters
 
+	annotation PBI_QueryGroupOrder = 0
+
 /// Raw CRM extracts, loaded as-is (connection only)
 queryGroup 0_RawData
+
+	annotation PBI_QueryGroupOrder = 1
 
 /// Reusable M functions
 queryGroup 0_Functions
 
+	annotation PBI_QueryGroupOrder = 2
+
 /// Cleaning, business rules and reshaping (connection only)
 queryGroup 1_StagingArea
+
+	annotation PBI_QueryGroupOrder = 3
 
 /// Tables loaded into the model
 queryGroup 2_DataModel
 
+	annotation PBI_QueryGroupOrder = 4
+
 annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
+
+annotation PBI_QueryOrder = ["fct_opportunity","fct_opportunity_line","fct_pipeline_snapshot","fct_sales_target","fct_stage_history","bridge_opportunity_plant","dim_account","dim_competitor","dim_country","dim_forecast_category","dim_loss_reason","dim_order_type","dim_plant","dim_product","dim_sales_rep","dim_stage","dim_theater","fct_data_quality_audit","AsOfDate","DataFolder","fnConvertToUSD","raw_Account","raw_FxRates","raw_Opportunity","raw_OpportunityLineItem","raw_SalesTargets","stg_Account","stg_FxRates","stg_Opportunity","stg_OpportunityLine","stg_DataQualityAudit","stg_SalesTargets"]
 
 ref table fct_opportunity
 ref table fct_opportunity_line
