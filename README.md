@@ -111,8 +111,10 @@ for conditional formatting.
 | | |
 |---|---|
 | ![Executive Summary](docs/screenshots/executive_summary.png) | ![Pipeline Health](docs/screenshots/pipeline_health.png) |
-| ![Where We Lose Deals](docs/screenshots/where_we_lose_deals.png) | ![CRM Data Quality](docs/screenshots/crm_data_quality.png) |
+| ![Where We Lose Deals](docs/screenshots/where_we_lose_deals.png) | ![CRM Data Quality](docs/screenshots/crm_data_quality.png) |  
 
+The opportunity detail page is hidden from navigation and reached only by drill-through, so summary pages stay clean while users can
+still get from a KPI to the underlying deals in one click.
 
 ---
 
