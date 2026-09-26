@@ -96,8 +96,7 @@ CALCULATE ( SUM ( dim_plant[PlantMWp] ),
             CROSSFILTER ( bridge_opportunity_plant[PlantId], dim_plant[PlantId], BOTH ) )
 ```
 
-Also included: like-for-like year-over-year for a partial year (`IsPast` flag), attainment vs targets of started
-quarters only, stage conversion from stage history, Pareto account ranking, and traffic-light colour measures used
+Also included: attainment vs targets of started quarters only, stage conversion from stage history and traffic-light colour measures used
 for conditional formatting.
 
 ### 3. Report pages
@@ -122,10 +121,8 @@ is a readable JSON file.
 
 ## Synthetic data — [`data_generator/`](data_generator/)
 
-`generate_data.py` produces a reproducible CRM dataset (seeded) with realistic, deliberate patterns so the reports
-have a story to tell: regional product strengths, order-type win rates, end-of-quarter closing, competitor-specific
-loss reasons, losses clustered by stage, Pareto-distributed accounts, and a missing-data rate that halves after the
-audit rollout. It writes the raw extracts, the reference tables, and a validation copy of the clean tables.
+`The data is fictional. Data was generated with the help of an AI assistant, shaped like a typical Salesforce CRM export,  
+the techniques I have been working could be demonstrated without using any company data.
 
 [`tests/test_raw_to_clean.py`](tests/test_raw_to_clean.py) re-implements the staging rules in pandas and checks that
 the raw extracts rebuild the clean tables exactly (1,800 deals, 2,491 lines to the dollar, 9,753 audit rows, 56 targets).
