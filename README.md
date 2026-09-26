@@ -114,19 +114,16 @@ for conditional formatting.
 | ![Where We Lose Deals](docs/screenshots/where_we_lose_deals.png) | ![CRM Data Quality](docs/screenshots/crm_data_quality.png) |
 
 
-The report uses a custom theme (`SalesAnalyticsTheme.json`) and is stored in PBIR format, so every page and visual
-is a readable JSON file.
-
 ---
 
-## Synthetic data — [`data_generator/`](data_generator/)
+## Synthetic data 
 
 `The data is fictional. Data was generated with the help of an AI assistant, shaped like a typical Salesforce CRM export,  
 the techniques I have been working could be demonstrated without using any company data.
 
 ---
 
-## Lessons Learnt
+## Lessons Learned
 
 The original model grew over many iterations (57 tables including 16 auto-generated date tables, 250+ measures). Rebuilding it cleanly, we changed:
 
