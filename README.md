@@ -139,13 +139,8 @@ The original model grew over many iterations (57 tables including 16 auto-genera
 
 ## Run it yourself
 
-1. Clone the repo. Optionally regenerate the data: `pip install -r data_generator/requirements.txt` then
-   `python data_generator/generate_data.py`.
-2. Open `powerbi/ModelandReports.pbip` in Power BI Desktop.
-3. **Transform data → Edit parameters** → set `DataFolder` to your local `data\` folder (with a trailing backslash).
-4. **Refresh.**
-
-Optional check: `python tests/test_raw_to_clean.py`
+1. Download the repo from the green "CODE" button as a zip folder.
+2. Unzip the file into "C:\gh\PowerBI-sales-performance-analytics-main\".
 
 ## Repository structure
 
@@ -154,16 +149,15 @@ Optional check: `python tests/test_raw_to_clean.py`
 │   ├── raw/                  Salesforce-style extracts (Power Query 0_RawData)
 │   ├── validation/           clean tables that staging must reproduce (tests only)
 │   └── *.csv                 reference tables loaded directly
-├── data_generator/           synthetic data generator
 ├── docs/                     data dictionary, screenshots
 ├── powerbi/                  Power BI project (PBIP: TMDL model + PBIR report)
 ├── powerquery/               every M query as a .pq file, by layer
-└── tests/                    raw → clean validation
+
 ```
 
 ## Tools
 
-Power BI Desktop (PBIP / TMDL / PBIR) · Power Query (M) · DAX · Python (pandas, NumPy)
+Power BI Desktop (PBIP / PBIX) · Power Query (M) · DAX · Python (pandas, NumPy)
 
 ---
 
