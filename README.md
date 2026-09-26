@@ -1,9 +1,11 @@
 # Sales Performance Analytics — Power BI Case Study
 
-End-to-end sales analytics on Salesforce-style CRM data: a layered **Power Query (M) ETL pipeline**,
-a **star-schema semantic model with ~40 DAX measures**, and **four report pages** for sales leadership.
+End-to-end sales analytics on Salesforce - style CRM data:  
+- a layered **Power Query (M) ETL pipeline**,
+- a **star-schema semantic model with ~40 DAX measures**,
+- and **four report pages** for sales leadership.
 
-> This repository recreates, with **fully synthetic data**, analytics work I built as Sales Operations Analyst
+> This repository recreates, with **fully synthetic data**, analytics work I built as a Sales Operations Analyst
 > at a B2B software company serving renewable-energy asset owners ("the Company"). No company data, code,
 > names or figures are included; the data generator and all business rules here are my own reconstruction.
 
@@ -15,14 +17,14 @@ a **star-schema semantic model with ~40 DAX measures**, and **four report pages*
 
 Sales Operations needed one trusted view of bookings, pipeline, win/loss and competitive performance across
 two sales theaters (Americas, EMEA & RoW) and two product lines (SaaS monitoring software, SCADA plant controls).
-Data lived in the CRM, targets in finance spreadsheets, and reporting for the sales teams' semi-annual results
-reviews was assembled by hand.
+Data lived in the CRM, quarterly targets were in finance spreadsheets, and reporting for the sales teams' quarter results
+reviews was assembled through excel sheets.
 
 ## Impact of the original work
 
 | | |
 |---|---|
-| **10 → 3 days** | preparation time for the semi-annual results presentation to the sales teams |
+| **10 → 3 days** | preparation time for the quarterly results presentation to the sales teams |
 | **−50%** | missing values in key CRM fields after the data-quality audit went live |
 | **CRM redesign** | the analysis exposed gaps in how products and customer plants were recorded; the CRM data model was changed (product assignments, plant attributes) so sales gaps could be analysed by product and asset |
 | **Process changes** | reports were used by Sales Operations to monitor KPIs and fine-tune sales processes |
@@ -50,7 +52,8 @@ tables load into the model. Highlights:
 - **Business-rule filtering** — duplicate losses, renewals and test accounts removed with null-safe,
   case-insensitive logic; CRM codes mapped to reporting names through a single mapping record.
 - **Multi-currency ARR** — [`fnConvertToUSD`](powerquery/0_Functions/fnConvertToUSD.pq) converts six currencies
-  with the rate valid on each deal's close date, read from an FX table (a rate change is a new row, not a code change).
+  with the rate valid on each deal's close date, read from an FX table with a validity period associated with each currency and
+  directly translates to the close date of an opportunity.
 - **Data-quality audit in M** — nine rule-based completeness checks per deal (extra rules for SCADA deals),
   unpivoted into a long table for the audit report.
 - **Reshaping finance data** — a wide quarterly target sheet in kUSD unpivoted and split into theater and product type.
@@ -113,7 +116,7 @@ for conditional formatting.
 | ![Executive Summary](docs/screenshots/executive_summary.png) | ![Pipeline Health](docs/screenshots/pipeline_health.png) |
 | ![Where We Lose Deals](docs/screenshots/where_we_lose_deals.png) | ![CRM Data Quality](docs/screenshots/crm_data_quality.png) |  
 
-The opportunity detail page is hidden from navigation and reached only by drill-through, so summary pages stay clean while users can
+**Drill Through Page:** The opportunity detail page is hidden from navigation and reached only by drill-through, so summary pages stay clean while users can
 still get from a KPI to the underlying deals in one click.
 
 ---
@@ -121,7 +124,7 @@ still get from a KPI to the underlying deals in one click.
 ## Synthetic data 
 
 `The data is fictional. Data was generated with the help of an AI assistant, shaped like a typical Salesforce CRM export,  
-the techniques I have been working could be demonstrated without using any company data.
+the techniques I have been working are demonstrated without using any company data.
 
 ---
 
@@ -132,7 +135,7 @@ The original model grew over many iterations (57 tables including 16 auto-genera
 - **Auto date/time off** — the original carried 16 hidden auto-generated date tables; here one marked calendar serves every fact.
 - **Fewer, slice-able measures** — region- and product-specific measure variants replaced by single measures sliced by dimensions.
 - **Single-direction relationships** — cross-filtering only where needed, inside the measure (`CROSSFILTER`, `TREATAS`).
-- **FX rates as data** — rates in a table instead of hard-coded in the conversion function.
+- **FX rates as data** — rates in a table instead of hard-coded in the conversion/loading M function.
 
 ---
 
