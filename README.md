@@ -111,8 +111,9 @@ for conditional formatting.
 
 | | |
 |---|---|
-| ![Pipeline Health](docs/screenshots/pipeline_health.png) | ![Where We Lose Deals](docs/screenshots/where_we_lose_deals.png) |
-| ![CRM Data Quality](docs/screenshots/crm_data_quality.png) | |
+| ![Executive Summary](docs/screenshots/executive_summary.png) | ![Pipeline Health](docs/screenshots/pipeline_health.png) |
+| ![Where We Lose Deals](docs/screenshots/where_we_lose_deals.png) | ![CRM Data Quality](docs/screenshots/crm_data_quality.png) |
+
 
 The report uses a custom theme (`SalesAnalyticsTheme.json`) and is stored in PBIR format, so every page and visual
 is a readable JSON file.
