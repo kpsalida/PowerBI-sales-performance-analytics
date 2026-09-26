@@ -28,10 +28,11 @@ table fct_opportunity
 
 	column OwnerId
 		dataType: string
-		isHidden
 		lineageTag: f5c0160c-cc66-464b-b8d7-8e025c306fdf
 		summarizeBy: none
 		sourceColumn: OwnerId
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -46,10 +47,11 @@ table fct_opportunity
 
 	column OrderType
 		dataType: string
-		isHidden
 		lineageTag: bffa8f31-c390-489c-ace0-b5f8cede8287
 		summarizeBy: none
 		sourceColumn: OrderType
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 

@@ -1,0 +1,185 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "2363cd48441d6091c161",
+  "position": {
+    "x": 563.7673130193906,
+    "y": 117.00831024930747,
+    "z": 0,
+    "height": 764.09972299168976,
+    "width": 794.23822714681432,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_opportunity"
+                    }
+                  },
+                  "Property": "OpportunityId"
+                }
+              },
+              "queryRef": "fct_opportunity.OpportunityId",
+              "nativeQueryRef": "OpportunityId"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_opportunity"
+                    }
+                  },
+                  "Property": "OpportunityName"
+                }
+              },
+              "queryRef": "fct_opportunity.OpportunityName",
+              "nativeQueryRef": "OpportunityName"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_sales_rep"
+                    }
+                  },
+                  "Property": "RepName"
+                }
+              },
+              "queryRef": "dim_sales_rep.RepName",
+              "nativeQueryRef": "RepName"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_opportunity"
+                    }
+                  },
+                  "Property": "OrderType"
+                }
+              },
+              "queryRef": "fct_opportunity.OrderType",
+              "nativeQueryRef": "OrderType"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fct_opportunity"
+                    }
+                  },
+                  "Property": "CloseDate"
+                }
+              },
+              "queryRef": "fct_opportunity.CloseDate",
+              "nativeQueryRef": "CloseDate"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fct_opportunity"
+                  }
+                },
+                "Property": "CloseDate"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f85c5cf1d2d0b69e46db",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_opportunity"
+              }
+            },
+            "Property": "OpportunityId"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c1350e707332c74d100c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_opportunity"
+              }
+            },
+            "Property": "OpportunityName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6b5153fb2060c8b8d8cd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_sales_rep"
+              }
+            },
+            "Property": "RepName"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "fbfa998c5554b025cd94",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_opportunity"
+              }
+            },
+            "Property": "OrderType"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8bb716597ca5aaaa009c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fct_opportunity"
+              }
+            },
+            "Property": "CloseDate"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

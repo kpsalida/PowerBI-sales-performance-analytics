@@ -262,5 +262,23 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "91314a726330c4275713",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_product_type"
+              }
+            },
+            "Property": "ProductType"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
   }
 }

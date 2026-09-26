@@ -233,5 +233,37 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "7429309806d0ecbdb4e4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_order_type"
+              }
+            },
+            "Property": "OrderType"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5e385414a6a7cd349516",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Win Rate %"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }
