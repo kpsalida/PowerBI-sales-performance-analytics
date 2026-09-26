@@ -143,7 +143,8 @@ The original model grew over many iterations (57 tables including 16 auto-genera
 
 1. Download the repo from the green "CODE" button as a zip folder.
 2. Unzip the file into "C:\gh\PowerBI-sales-performance-analytics-main\".
-3. Press "Refresh" to read the csv files again and fill the tables.
+3. Run "ModelandReports.pbip"
+4. Press "Refresh" to read the csv files again and fill the tables.
 
 ## Repository structure
 
