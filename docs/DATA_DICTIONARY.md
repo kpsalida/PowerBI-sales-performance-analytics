@@ -81,3 +81,4 @@ Deliberately not related: `dim_country`/`dim_sales_rep` → `dim_theater` and `d
 - Each competitor has a product focus and a typical loss reason; Arcturus Controls is the toughest.
 - Price losses happen late (Proposal/Negotiation); "No Decision" losses happen early.
 - Missing-field rate is ~35% before the audit rollout (Oct 2025) and ~18% after, and differs by rep.
+- The top 20% of accounts generate roughly 60% of won ARR (Pareto).
