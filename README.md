@@ -124,22 +124,16 @@ is a readable JSON file.
 `The data is fictional. Data was generated with the help of an AI assistant, shaped like a typical Salesforce CRM export,  
 the techniques I have been working could be demonstrated without using any company data.
 
-[`tests/test_raw_to_clean.py`](tests/test_raw_to_clean.py) re-implements the staging rules in pandas and checks that
-the raw extracts rebuild the clean tables exactly (1,800 deals, 2,491 lines to the dollar, 9,753 audit rows, 56 targets).
-
-Details: [`docs/DATA_DICTIONARY.md`](docs/DATA_DICTIONARY.md)
-
 ---
 
-## Lessons carried over from the production model
+## Lessons Learnt
 
-The original model grew over many iterations (57 tables including 16 auto-generated date tables, 250+ measures). Rebuilding it cleanly, I changed:
+The original model grew over many iterations (57 tables including 16 auto-generated date tables, 250+ measures). Rebuilding it cleanly, we changed:
 
 - **Auto date/time off** — the original carried 16 hidden auto-generated date tables; here one marked calendar serves every fact.
 - **Fewer, slice-able measures** — region- and product-specific measure variants replaced by single measures sliced by dimensions.
 - **Single-direction relationships** — cross-filtering only where needed, inside the measure (`CROSSFILTER`, `TREATAS`).
 - **FX rates as data** — rates in a table instead of hard-coded in the conversion function.
-- **One definition per KPI** — e.g. a single, value-based win rate (ARR won ÷ ARR won + lost) used everywhere.
 
 ---
 
