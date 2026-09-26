@@ -4,6 +4,7 @@ model Model
 	sourceQueryCulture: en-US
 	valueFilterBehavior: independent
 	dataAccessOptions
+		fastCombine
 		legacyRedirects
 		returnErrorValuesAsNull
 

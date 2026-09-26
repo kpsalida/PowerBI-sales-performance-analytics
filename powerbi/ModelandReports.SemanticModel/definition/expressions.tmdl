@@ -1,10 +1,10 @@
-expression AsOfDate = #date(2026, 9, 30) meta [IsParameterQuery = true, Type = "Date", IsParameterQueryRequired = true]
+expression AsOfDate = #date(2026, 9, 30) meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=true]
 	lineageTag: 3add3c62-7c48-4cd8-995f-54845811ccfe
 	queryGroup: 00_Parameters
 
 	annotation PBI_ResultType = Date
 
-expression DataFolder = "C:\Users\kathe\Downloads\NewModel\sales-performance-analytics\sales-performance-analytics\data\" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+expression DataFolder = "C:\gh\PowerBI-sales-performance-analytics-main\data\" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
 	lineageTag: 78a85bf2-4bd3-415d-80ac-99806b072f54
 	queryGroup: 00_Parameters
 
