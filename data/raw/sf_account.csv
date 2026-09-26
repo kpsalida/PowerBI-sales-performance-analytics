@@ -1,0 +1,162 @@
+Id,Name,BillingCountryCode,Account_Theater__c,Type
+ACC0001,Crestline Energy Partners,BR,Americas,Asset Manager
+ACC0002,Kestrel Infrastructure,GB,EMEA & RoW,O&M Provider
+ACC0003,Zephyr Clean Assets,IN,EMEA & RoW,Independent Power Producer
+ACC0004,Ember Power,ES,EMEA & RoW,Independent Power Producer
+ACC0005,Kestrel Power,US,Americas,Independent Power Producer
+ACC0006,Aurora Energy Partners,US,Americas,Utility
+ACC0007,Helios Renewables,CA,Americas,Asset Manager
+ACC0008,Atlas Wind Holdings,US,Americas,EPC Contractor
+ACC0009,Vireo Utilities,DE,EMEA & RoW,Utility
+ACC0010,Solara Clean Assets,US,Americas,Independent Power Producer
+ACC0011,Borealis Clean Assets,ES,EMEA & RoW,EPC Contractor
+ACC0012,Aurora Wind Holdings,DE,EMEA & RoW,EPC Contractor
+ACC0013,Cobalt Energy,GR,EMEA & RoW,Independent Power Producer
+ACC0014,Halcyon Renewables,US,Americas,Asset Manager
+ACC0015,Aurora Clean Assets,FR,EMEA & RoW,Independent Power Producer
+ACC0016,Meridian Energy,DE,EMEA & RoW,Independent Power Producer
+ACC0017,Altamira Clean Assets,GB,EMEA & RoW,Independent Power Producer
+ACC0018,Prairie Wind Holdings,US,Americas,O&M Provider
+ACC0019,Nordwind Infrastructure,US,Americas,Asset Manager
+ACC0020,Pinnacle Power,AU,EMEA & RoW,Asset Manager
+ACC0021,Prairie Clean Assets,CO,Americas,Utility
+ACC0022,Atlas Renewables,BR,Americas,Asset Manager
+ACC0023,Helios Green Capital,ES,EMEA & RoW,O&M Provider
+ACC0024,Halcyon Solar Partners,DE,EMEA & RoW,EPC Contractor
+ACC0025,Aurora Power,AU,EMEA & RoW,Asset Manager
+ACC0026,Lumen Solar Partners,BR,Americas,Asset Manager
+ACC0027,Pinnacle Energy Partners,AU,EMEA & RoW,O&M Provider
+ACC0028,Lumen Power,US,Americas,Utility
+ACC0029,Crestline Solar Partners,IT,EMEA & RoW,O&M Provider
+ACC0030,Kestrel Wind Holdings,PT,EMEA & RoW,Independent Power Producer
+ACC0031,Tidewater Renewables,US,Americas,EPC Contractor
+ACC0032,Helios Power,US,Americas,Utility
+ACC0033,Vireo Power,ES,EMEA & RoW,Independent Power Producer
+ACC0034,Meridian Renewables,AU,EMEA & RoW,Asset Manager
+ACC0035,Everglow Energy Partners,GR,EMEA & RoW,Utility
+ACC0036,Pinnacle Clean Assets,AU,EMEA & RoW,Independent Power Producer
+ACC0037,Crestline Wind Holdings,FR,EMEA & RoW,Asset Manager
+ACC0038,Cobalt Solar Partners,ES,EMEA & RoW,EPC Contractor
+ACC0039,Solara Utilities,GB,EMEA & RoW,Independent Power Producer
+ACC0040,Solstice Power,US,Americas,Asset Manager
+ACC0041,Zephyr Solar Partners,US,Americas,Asset Manager
+ACC0042,Cobalt Utilities,FR,EMEA & RoW,Independent Power Producer
+ACC0043,Nordwind Clean Assets,FR,EMEA & RoW,O&M Provider
+ACC0044,Tidewater Energy Partners,CA,Americas,EPC Contractor
+ACC0045,Tidewater Wind Holdings,IT,EMEA & RoW,Independent Power Producer
+ACC0046,Solara Wind Holdings,GR,EMEA & RoW,O&M Provider
+ACC0047,Nordwind Wind Holdings,NL,EMEA & RoW,EPC Contractor
+ACC0048,Pinnacle Infrastructure,GR,EMEA & RoW,Independent Power Producer
+ACC0049,Prairie Renewables,ES,EMEA & RoW,EPC Contractor
+ACC0050,Kestrel Clean Assets,CL,Americas,Independent Power Producer
+ACC0051,Everglow Infrastructure,ES,EMEA & RoW,O&M Provider
+ACC0052,Kestrel Energy Partners,PT,EMEA & RoW,Utility
+ACC0053,Solstice Renewables,NL,EMEA & RoW,Utility
+ACC0054,Lumen Renewables,ES,EMEA & RoW,Independent Power Producer
+ACC0055,Ember Renewables,MX,Americas,EPC Contractor
+ACC0056,Meridian Clean Assets,CA,Americas,Independent Power Producer
+ACC0057,Pinnacle Energy,GB,EMEA & RoW,Independent Power Producer
+ACC0058,Solstice Utilities,FR,EMEA & RoW,Independent Power Producer
+ACC0059,Orion Energy Partners,US,Americas,EPC Contractor
+ACC0060,Nordwind Green Capital,US,Americas,Independent Power Producer
+ACC0061,Ember Clean Assets,GR,EMEA & RoW,O&M Provider
+ACC0062,Lumen Energy Partners,US,Americas,Utility
+ACC0063,Helios Clean Assets,FR,EMEA & RoW,Independent Power Producer
+ACC0064,Sierra Clean Assets,BR,Americas,Independent Power Producer
+ACC0065,Crestline Power,US,Americas,Independent Power Producer
+ACC0066,Meridian Solar Partners,AU,EMEA & RoW,Utility
+ACC0067,Crestline Green Capital,US,Americas,EPC Contractor
+ACC0068,Cobalt Power,BR,Americas,Independent Power Producer
+ACC0069,Azure Energy,US,Americas,EPC Contractor
+ACC0070,Everglow Clean Assets,US,Americas,Independent Power Producer
+ACC0071,Kestrel Solar Partners,US,Americas,EPC Contractor
+ACC0072,Everglow Renewables,US,Americas,O&M Provider
+ACC0073,Borealis Green Capital,US,Americas,EPC Contractor
+ACC0074,Nordwind Energy Partners,US,Americas,Utility
+ACC0075,Solara Renewables,GR,EMEA & RoW,EPC Contractor
+ACC0076,Halcyon Energy,DE,EMEA & RoW,Independent Power Producer
+ACC0077,Sierra Utilities,CO,Americas,Independent Power Producer
+ACC0078,Borealis Infrastructure,BR,Americas,Independent Power Producer
+ACC0079,Meridian Utilities,ES,EMEA & RoW,Asset Manager
+ACC0080,Helios Infrastructure,ZA,EMEA & RoW,Utility
+ACC0081,Zephyr Infrastructure,NL,EMEA & RoW,Utility
+ACC0082,Everglow Utilities,US,Americas,EPC Contractor
+ACC0083,Kestrel Utilities,US,Americas,Independent Power Producer
+ACC0084,Cobalt Renewables,CA,Americas,Utility
+ACC0085,Sierra Infrastructure,MX,Americas,Independent Power Producer
+ACC0086,Ember Solar Partners,IT,EMEA & RoW,Independent Power Producer
+ACC0087,Vireo Wind Holdings,ES,EMEA & RoW,Utility
+ACC0088,Halcyon Power,US,Americas,O&M Provider
+ACC0089,Orion Energy,CL,Americas,Utility
+ACC0090,Solstice Green Capital,IT,EMEA & RoW,Independent Power Producer
+ACC0091,Solara Infrastructure,US,Americas,Utility
+ACC0092,Sierra Power,FR,EMEA & RoW,Independent Power Producer
+ACC0093,Solara Solar Partners,US,Americas,EPC Contractor
+ACC0094,Azure Clean Assets,AU,EMEA & RoW,Utility
+ACC0095,Prairie Energy,US,Americas,Independent Power Producer
+ACC0096,Crestline Energy,NL,EMEA & RoW,Independent Power Producer
+ACC0097,Azure Solar Partners,SA,EMEA & RoW,Independent Power Producer
+ACC0098,Zephyr Renewables,IN,EMEA & RoW,O&M Provider
+ACC0099,Solara Energy,FR,EMEA & RoW,Asset Manager
+ACC0100,Tidewater Utilities,GB,EMEA & RoW,EPC Contractor
+ACC0101,Solara Green Capital,PT,EMEA & RoW,Utility
+ACC0102,Helios Utilities,GB,EMEA & RoW,Asset Manager
+ACC0103,Lumen Utilities,US,Americas,Independent Power Producer
+ACC0104,Azure Energy Partners,IT,EMEA & RoW,O&M Provider
+ACC0105,Altamira Infrastructure,IT,EMEA & RoW,Independent Power Producer
+ACC0106,Azure Power,NL,EMEA & RoW,Asset Manager
+ACC0107,Azure Wind Holdings,ES,EMEA & RoW,Utility
+ACC0108,Zephyr Wind Holdings,CL,Americas,Utility
+ACC0109,Tidewater Clean Assets,PT,EMEA & RoW,O&M Provider
+ACC0110,Zephyr Energy Partners,MX,Americas,Independent Power Producer
+ACC0111,Atlas Infrastructure,US,Americas,Asset Manager
+ACC0112,Atlas Energy Partners,ES,EMEA & RoW,Asset Manager
+ACC0113,Tidewater Green Capital,ES,EMEA & RoW,Asset Manager
+ACC0114,Orion Green Capital,CA,Americas,Independent Power Producer
+ACC0115,Halcyon Infrastructure,CL,Americas,Independent Power Producer
+ACC0116,Ember Energy,CL,Americas,Independent Power Producer
+ACC0117,Cobalt Clean Assets,BR,Americas,Independent Power Producer
+ACC0118,Helios Energy Partners,CL,Americas,Asset Manager
+ACC0119,Everglow Solar Partners,DE,EMEA & RoW,Utility
+ACC0120,Prairie Power,BR,Americas,Utility
+ACC0121,Meridian Energy Partners,AU,EMEA & RoW,Asset Manager
+ACC0122,Sierra Wind Holdings,SA,EMEA & RoW,Asset Manager
+ACC0123,Nordwind Energy,ES,EMEA & RoW,Independent Power Producer
+ACC0124,Pinnacle Green Capital,BR,Americas,Asset Manager
+ACC0125,Orion Solar Partners,IT,EMEA & RoW,Independent Power Producer
+ACC0126,Ember Energy Partners,NL,EMEA & RoW,Independent Power Producer
+ACC0127,Helios Solar Partners,PT,EMEA & RoW,Asset Manager
+ACC0128,Kestrel Energy,FR,EMEA & RoW,Asset Manager
+ACC0129,Borealis Utilities,IT,EMEA & RoW,Independent Power Producer
+ACC0130,Cobalt Infrastructure,PT,EMEA & RoW,Asset Manager
+ACC0131,Crestline Utilities,BR,Americas,Asset Manager
+ACC0132,Sierra Solar Partners,GB,EMEA & RoW,Utility
+ACC0133,Azure Utilities,CA,Americas,Utility
+ACC0134,Prairie Energy Partners,DE,EMEA & RoW,Utility
+ACC0135,Altamira Solar Partners,NL,EMEA & RoW,Independent Power Producer
+ACC0136,Atlas Power,US,Americas,EPC Contractor
+ACC0137,Kestrel Green Capital,GR,EMEA & RoW,Asset Manager
+ACC0138,Orion Utilities,US,Americas,Asset Manager
+ACC0139,Solara Power,DE,EMEA & RoW,Utility
+ACC0140,Orion Wind Holdings,US,Americas,Asset Manager
+ACC0141,Orion Clean Assets,AU,EMEA & RoW,Asset Manager
+ACC0142,Solstice Wind Holdings,US,Americas,Utility
+ACC0143,Prairie Green Capital,AU,EMEA & RoW,EPC Contractor
+ACC0144,Altamira Energy,FR,EMEA & RoW,O&M Provider
+ACC0145,Vireo Green Capital,GR,EMEA & RoW,Asset Manager
+ACC0146,Kestrel Renewables,GB,EMEA & RoW,Asset Manager
+ACC0147,Halcyon Utilities,FR,EMEA & RoW,EPC Contractor
+ACC0148,Lumen Energy,AU,EMEA & RoW,Independent Power Producer
+ACC0149,Tidewater Power,MX,Americas,EPC Contractor
+ACC0150,Ember Utilities,GR,EMEA & RoW,Asset Manager
+ACC0151,Meridian Wind Holdings,US,Americas,Independent Power Producer
+ACC0152,Prairie Solar Partners,GR,EMEA & RoW,Independent Power Producer
+ACC0153,Meridian Power,US,Americas,EPC Contractor
+ACC0154,Solstice Energy Partners,IT,EMEA & RoW,Independent Power Producer
+ACC0155,Lumen Clean Assets,IT,EMEA & RoW,Independent Power Producer
+ACC0156,Zephyr Utilities,ES,EMEA & RoW,Independent Power Producer
+ACC0157,Aurora Energy,IT,EMEA & RoW,Independent Power Producer
+ACC0158,Halcyon Clean Assets,GB,EMEA & RoW,Independent Power Producer
+ACC0159,Pinnacle Renewables,FR,EMEA & RoW,Utility
+ACC0160,Altamira Renewables,ES,EMEA & RoW,Independent Power Producer
+ACC9999,TEST Account - Sandbox,US,Americas,Independent Power Producer

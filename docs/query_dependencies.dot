@@ -1,0 +1,71 @@
+digraph Q {
+graph [rankdir=LR, bgcolor="white", pad=0.5, nodesep=0.22, ranksep=1.0, fontname="DejaVu Sans", splines=true, label=<<b>Power Query pipeline — query dependencies</b><br/><font point-size="11" color="#605E5C">raw CRM extracts → staging (business rules, FX conversion, audit, reshaping) → tables loaded into the model</font>>, labelloc=t, fontsize=18];
+node [shape=box, style="rounded,filled", fontname="DejaVu Sans", fontsize=11, penwidth=0, width=2.3, height=0.38];
+edge [color="#85BAE0", arrowsize=0.6, penwidth=1.1];
+"hdr0" [label=<<b>CSV files  (data/)</b>>, shape=plaintext, style="", fontsize=12, fontcolor="#05071F"];
+"file:raw_Opportunity" [label="sf_opportunity.csv", shape=note, style="filled", fillcolor="white", color="#C8C6C4", penwidth=1, fontsize=10, fontcolor="#605E5C"];
+"file:raw_OpportunityLineItem" [label="sf_opportunity_line_item.csv", shape=note, style="filled", fillcolor="white", color="#C8C6C4", penwidth=1, fontsize=10, fontcolor="#605E5C"];
+"file:raw_Account" [label="sf_account.csv", shape=note, style="filled", fillcolor="white", color="#C8C6C4", penwidth=1, fontsize=10, fontcolor="#605E5C"];
+"file:raw_FxRates" [label="fx_rates.csv", shape=note, style="filled", fillcolor="white", color="#C8C6C4", penwidth=1, fontsize=10, fontcolor="#605E5C"];
+"file:raw_SalesTargets" [label="sales_targets_wide.csv", shape=note, style="filled", fillcolor="white", color="#C8C6C4", penwidth=1, fontsize=10, fontcolor="#605E5C"];
+"refcsv" [label="12 reference CSVs\n(dims, stage history, bridge)", shape=note, style="filled", fillcolor="white", color="#C8C6C4", penwidth=1, fontsize=10, fontcolor="#605E5C"];
+"snapcsv" [label="fct_pipeline_snapshot.csv", shape=note, style="filled", fillcolor="white", color="#C8C6C4", penwidth=1, fontsize=10, fontcolor="#605E5C"];
+{rank=same; "hdr0"; "file:raw_Opportunity"; "file:raw_OpportunityLineItem"; "file:raw_Account"; "file:raw_FxRates"; "file:raw_SalesTargets"; "refcsv"; "snapcsv";}
+"hdr0" -> "file:raw_Opportunity" -> "file:raw_OpportunityLineItem" -> "file:raw_Account" -> "file:raw_FxRates" -> "file:raw_SalesTargets" -> "refcsv" -> "snapcsv" [style=invis];
+"hdr1" [label=<<b>0_RawData</b>>, shape=plaintext, style="", fontsize=12, fontcolor="#05071F"];
+"raw_Opportunity" [fillcolor="#55C1FF", fontcolor="#05071F"];
+"raw_OpportunityLineItem" [fillcolor="#55C1FF", fontcolor="#05071F"];
+"raw_Account" [fillcolor="#55C1FF", fontcolor="#05071F"];
+"raw_FxRates" [fillcolor="#55C1FF", fontcolor="#05071F"];
+"raw_SalesTargets" [fillcolor="#55C1FF", fontcolor="#05071F"];
+"fnConvertToUSD" [label="fnConvertToUSD  (function)", fillcolor="#00CC8F", fontcolor="#05071F"];
+{rank=same; "hdr1"; "raw_Opportunity"; "raw_OpportunityLineItem"; "raw_Account"; "raw_FxRates"; "raw_SalesTargets"; "fnConvertToUSD";}
+"hdr1" -> "raw_Opportunity" -> "raw_OpportunityLineItem" -> "raw_Account" -> "raw_FxRates" -> "raw_SalesTargets" -> "fnConvertToUSD" [style=invis];
+"hdr2" [label=<<b>1_StagingArea</b>>, shape=plaintext, style="", fontsize=12, fontcolor="#05071F"];
+"stg_Account" [fillcolor="#094780", fontcolor="white"];
+"stg_Opportunity" [fillcolor="#094780", fontcolor="white"];
+"stg_FxRates" [fillcolor="#094780", fontcolor="white"];
+"stg_OpportunityLine" [fillcolor="#094780", fontcolor="white"];
+"stg_DataQualityAudit" [fillcolor="#094780", fontcolor="white"];
+"stg_SalesTargets" [fillcolor="#094780", fontcolor="white"];
+{rank=same; "hdr2"; "stg_Account"; "stg_Opportunity"; "stg_FxRates"; "stg_OpportunityLine"; "stg_DataQualityAudit"; "stg_SalesTargets";}
+"hdr2" -> "stg_Account" -> "stg_Opportunity" -> "stg_FxRates" -> "stg_OpportunityLine" -> "stg_DataQualityAudit" -> "stg_SalesTargets" [style=invis];
+"hdr3" [label=<<b>2_DataModel  (loaded)</b>>, shape=plaintext, style="", fontsize=12, fontcolor="#05071F"];
+"dim_account" [fillcolor="#074DFF", fontcolor="white"];
+"fct_opportunity" [fillcolor="#074DFF", fontcolor="white"];
+"fct_opportunity_line" [fillcolor="#074DFF", fontcolor="white"];
+"fct_data_quality_audit" [fillcolor="#074DFF", fontcolor="white"];
+"fct_sales_target" [fillcolor="#074DFF", fontcolor="white"];
+"fct_pipeline_snapshot" [fillcolor="#074DFF", fontcolor="white"];
+"ref" [label="12 reference tables\n(dims, stage history, plant bridge)", fillcolor="#ECF6FF", fontcolor="#05071F"];
+{rank=same; "hdr3"; "dim_account"; "fct_opportunity"; "fct_opportunity_line"; "fct_data_quality_audit"; "fct_sales_target"; "fct_pipeline_snapshot"; "ref";}
+"hdr3" -> "dim_account" -> "fct_opportunity" -> "fct_opportunity_line" -> "fct_data_quality_audit" -> "fct_sales_target" -> "fct_pipeline_snapshot" -> "ref" [style=invis];
+"hdr0" -> "hdr1" [style=invis];
+"hdr1" -> "hdr2" [style=invis];
+"hdr2" -> "hdr3" [style=invis];
+"file:raw_Opportunity" -> "raw_Opportunity";
+"file:raw_OpportunityLineItem" -> "raw_OpportunityLineItem";
+"file:raw_Account" -> "raw_Account";
+"file:raw_FxRates" -> "raw_FxRates";
+"file:raw_SalesTargets" -> "raw_SalesTargets";
+"raw_Account" -> "stg_Account";
+"raw_Opportunity" -> "stg_Opportunity";
+"stg_Account" -> "stg_Opportunity";
+"raw_OpportunityLineItem" -> "stg_OpportunityLine";
+"stg_Opportunity" -> "stg_OpportunityLine";
+"raw_FxRates" -> "stg_FxRates";
+"stg_FxRates" -> "stg_OpportunityLine";
+"fnConvertToUSD" -> "stg_OpportunityLine";
+"ref" -> "stg_OpportunityLine";
+"ref" -> "stg_DataQualityAudit";
+"stg_Opportunity" -> "stg_DataQualityAudit";
+"raw_SalesTargets" -> "stg_SalesTargets";
+"stg_Account" -> "dim_account";
+"stg_Opportunity" -> "fct_opportunity";
+"stg_OpportunityLine" -> "fct_opportunity_line";
+"stg_DataQualityAudit" -> "fct_data_quality_audit";
+"stg_SalesTargets" -> "fct_sales_target";
+"stg_Opportunity" -> "fct_pipeline_snapshot";
+"snapcsv" -> "fct_pipeline_snapshot";
+"refcsv" -> "ref";
+}

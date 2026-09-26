@@ -1,0 +1,20 @@
+CountryCode,Country,Region,Theater
+US,United States,North America,Americas
+CA,Canada,North America,Americas
+MX,Mexico,LATAM,Americas
+BR,Brazil,LATAM,Americas
+CL,Chile,LATAM,Americas
+CO,Colombia,LATAM,Americas
+ES,Spain,Southern Europe,EMEA & RoW
+IT,Italy,Southern Europe,EMEA & RoW
+GR,Greece,Southern Europe,EMEA & RoW
+PT,Portugal,Southern Europe,EMEA & RoW
+DE,Germany,Northern Europe,EMEA & RoW
+GB,United Kingdom,Northern Europe,EMEA & RoW
+FR,France,Northern Europe,EMEA & RoW
+NL,Netherlands,Northern Europe,EMEA & RoW
+ZA,South Africa,Middle East & Africa,EMEA & RoW
+SA,Saudi Arabia,Middle East & Africa,EMEA & RoW
+AU,Australia,APAC,EMEA & RoW
+IN,India,APAC,EMEA & RoW
+JP,Japan,APAC,EMEA & RoW

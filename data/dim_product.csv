@@ -1,0 +1,9 @@
+ProductId,ProductName,ProductType
+P01,APM Platform,SaaS
+P02,Portfolio Analytics,SaaS
+P03,Energy Forecasting,SaaS
+P04,Work Order Management,SaaS
+P05,SCADA Core,SCADA
+P06,Power Plant Controller,SCADA
+P07,Edge Data Logger,SCADA
+P08,OT Cybersecurity Add-on,SCADA

@@ -1,0 +1,8 @@
+StageName,StageOrder,IsClosed,IsWon,DefaultForecastCategory
+Prospecting,1,0,0,Pipeline
+Qualification,2,0,0,Pipeline
+Solution Design,3,0,0,Best Case
+Proposal,4,0,0,Best Case
+Negotiation,5,0,0,Commit
+Closed Won,6,1,1,Closed
+Closed Lost,7,1,0,Omitted

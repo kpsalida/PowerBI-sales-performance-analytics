@@ -1,0 +1,9 @@
+CompetitorId,CompetitorName,CompetitorType,ProductFocus
+C01,Voltaris Systems,Direct Competitor,SCADA
+C02,GridSight Analytics,Direct Competitor,SaaS
+C03,Arcturus Controls,Hardware OEM,SCADA
+C04,Nimbus Energy Cloud,Analytics Start-up,SaaS
+C05,TerraWatt Software,Direct Competitor,Both
+C06,Solvance Monitoring,Regional Player,Both
+C07,In-house Solution,In-house,Both
+C00,No Competitor,None,Both
